@@ -1,5 +1,3 @@
-//https://reqres.in/api/users
-
 function sendRequest(method, url) 
 {
     return new Promise((resolve, reject) => {
@@ -23,26 +21,54 @@ function sendRequest(method, url)
     })
 }
 
-function reqNumber()
+function reqPoke()
 {
-    var number = document.getElementById("number").value;
-    sendRequest('GET', 'https://reqres.in/api/users/?per_page=' + number)
-    .then(function(result) {
-        console.log(result);
-        if(result.data.length > 0)
-        {
-            var temp = "";
-            result.data.forEach((u) => {
-                temp +="<tr>";
-                temp +="<td>" + u.first_name + "</td>";
-                temp +="<td>" + u.last_name + "</td>";
-                temp +="<td>" + u.email + "</td></tr>";
-            });
-            document.getElementById("data").innerHTML = temp;
-        }
+    var name = document.getElementById("name").value;
+    var dual = document.getElementById("dual");
+    var select = document.getElementById("select").value;
+    var offset = '?offset=' + select;
+    var limit = '&limit=100';
+    sendRequest('GET', 'https://pokeapi.co/api/v2/pokemon' + offset + limit)
+    .then(function(data) {
+        var temp = "";
+        data.results.forEach((poke) => {
+            sendRequest('GET', poke.url)
+                .then(function(data) {
+                    if(dual.checked)
+                    {
+                        if(data.types.length > 1)
+                        {
+                            return;
+                        }
+                    }
+                    
+                    if(data.types[0].type.name.toLowerCase() == name.toLowerCase() || data.types[1].type.name.toLowerCase() == name.toLowerCase())
+                    {
+                        temp +="<tr>";
+                        temp +="<td>" + data.id + "</td>";
+                        temp +="<td>" + data.name.capitalize() + "</td>";
+                        temp +="<td>" + data.types[0].type.name.capitalize();
+                        if(data.types[1] != undefined)
+                        {
+                            temp +=", " + data.types[1].type.name.capitalize();
+                        }
+                        temp +="</td></tr>"
+                    }
+                    document.getElementById("data").innerHTML = temp;
+
+                })
+                .catch(function(data) {
+                    console.log(data);
+                });
+        });
         
+
     })
     .catch(function(data) {
         console.log(data);
     });
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }

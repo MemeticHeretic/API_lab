@@ -10,16 +10,34 @@
 </head>
 <body>
     <div style="margin: 1%;">
-        <h2>Введите количество человек</h2>
-        <input type="text" id="number">
-        <input type="button" id="request" value="Запрос" onclick="reqNumber()">
+        <h2>Введите тип покемона</h2>
+        <input type="text" id="name">
+        <input type="button" id="request" value="Запрос" onclick="reqPoke()">
+        <br>
+        <select id="select" style="margin-top: 1%; margin-bottom: 1%;">
+            <option value='0'>1-100</option>
+            <option value='100'>101-200</option>
+            <option value='200'>201-300</option>
+            <option value='300'>301-400</option>
+            <option value='400'>401-500</option>
+            <option value='500'>501-600</option>
+            <option value='600'>601-700</option>
+            <option value='700'>701-800</option>
+            <option value='800'>801-900</option>
+            <option value='900'>901-1000</option>
+            <option value='1000'>1001-1100</option>
+            <option value='1100'>1101-1200</option>
+        </select>
+        <br>
+        <input type="checkbox" id="dual">
+        <label for="dual">Только одиночные типы</label>
     </div>
-        <table class="table table-stripped">
+        <table>
             <thead>
                 <tr>
+                    <th>Номер</th>
                     <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Email</th>
+                    <th>Типы</th>
                 </tr>
             </thead>
             <tbody id="data">
