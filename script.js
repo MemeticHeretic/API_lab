@@ -26,6 +26,7 @@ function reqPoke()
     var name = document.getElementById("name").value;
     var dual = document.getElementById("dual");
     var select = document.getElementById("select").value;
+    var tableObject = document.getElementById('table');
     var offset = '?offset=' + select;
     var limit = '&limit=100';
     sendRequest('GET', 'https://pokeapi.co/api/v2/pokemon' + offset + limit)
@@ -55,19 +56,19 @@ function reqPoke()
                         temp +="</td></tr>"
                     }
                     document.getElementById("data").innerHTML = temp;
-
                 })
                 .catch(function(data) {
                     console.log(data);
                 });
         });
-        
+        sorttable.makeSortable(tableObject);
 
     })
     .catch(function(data) {
         console.log(data);
     });
 }
+
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="script.js"></script>
+	<script src="sorttable.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -32,10 +33,10 @@
         <input type="checkbox" id="dual">
         <label for="dual">Только одиночные типы</label>
     </div>
-        <table class="table table-stripped">
+        <table class="table table-stripped sortable">
             <thead>
                 <tr>
-                    <th>Номер</th>
+                    <th class="sorttable_numeric">Номер</th>
                     <th>Имя</th>
                     <th>Типы</th>
                 </tr>
